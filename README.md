@@ -1,0 +1,2 @@
+# Sa-de-Digital---Uso-Consciente-de-Telas
+Tutorial interativo sobre saúde digital e uso consciente de telas 📱💻   Aprenda sobre riscos da tecnologia, soluções práticas e equilíbrio digital. Inclui quiz educativo e plano de dia saudável.
