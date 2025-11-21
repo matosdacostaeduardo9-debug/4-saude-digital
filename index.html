@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde Digital - Uso Consciente de Telas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --purple: #9b59b6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .developer-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 140px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-item.active {
+            background-color: var(--purple);
+            color: white;
+        }
+        
+        .menu-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-item span {
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .progress-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .mark-read-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .mark-read-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .mark-read-btn.read {
+            background-color: #95a5a6;
+            cursor: default;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--purple);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(155, 89, 182, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--purple);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--warning);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .danger {
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--danger);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .success {
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--success);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .risks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .risk-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--danger);
+        }
+        
+        .risk-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .risk-card h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--success);
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .solution-card h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .symptom-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .symptom-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .symptom-item i {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+        
+        .daily-plan {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .time-slot {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .time-slot:last-child {
+            border-bottom: none;
+        }
+        
+        .time {
+            font-weight: bold;
+            min-width: 100px;
+            color: var(--purple);
+        }
+        
+        .activity {
+            flex-grow: 1;
+        }
+        
+        .activity i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .quiz-option {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .quiz-option.selected {
+            background-color: rgba(155, 89, 182, 0.2);
+            border-color: var(--purple);
+        }
+        
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .quiz-result.correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .quiz-result.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .btn {
+            background-color: var(--purple);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #8e44ad;
+        }
+        
+        .final-results {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .final-results.good {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 2px solid var(--success);
+        }
+        
+        .final-results.average {
+            background-color: rgba(243, 156, 18, 0.2);
+            border: 2px solid var(--warning);
+        }
+        
+        .final-results.poor {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 2px solid var(--danger);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-item {
+                width: 100%;
+                max-width: 250px;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 1rem;
+            }
+            
+            .menu-item i {
+                margin-bottom: 0;
+            }
+            
+            .risks-grid, .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .symptom-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Saúde Digital - Uso Consciente de Telas</h1>
+        <p class="subtitle">Aprenda a equilibrar tecnologia e bem-estar no seu dia a dia</p>
+        <div class="developer-info">
+            Desenvolvido por: Eduardo Matos - RU: 3838064
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-menu">
+            <div class="menu-item active" data-tab="intro">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </div>
+            <div class="menu-item" data-tab="risks">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Riscos</span>
+            </div>
+            <div class="menu-item" data-tab="solutions">
+                <i class="fas fa-heartbeat"></i>
+                <span>Soluções</span>
+            </div>
+            <div class="menu-item" data-tab="identification">
+                <i class="fas fa-search"></i>
+                <span>Identificação</span>
+            </div>
+            <div class="menu-item" data-tab="quiz">
+                <i class="fas fa-question-circle"></i>
+                <span>Teste</span>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="global-progress"></div>
+        </div>
+        
+        <div id="intro" class="tab-content active">
+            <div class="card">
+                <div class="progress-indicator">
+                    <button class="mark-read-btn" data-section="intro">Marcar como Lido</button>
+                </div>
+                <h2>O Impacto das Telas na Nossa Vida</h2>
+                <p>Passamos cada vez mais tempo conectados a dispositivos digitais - smartphones, computadores, tablets e televisões. Enquanto a tecnologia traz benefícios inegáveis, o uso excessivo pode ter consequências significativas para nossa saúde física e mental.</p>
+                
+                <div class="highlight">
+                    <h3>Estatísticas Alarmantes</h3>
+                    <ul>
+                        <li>O brasileiro passa em média <strong>9 horas por dia</strong> em frente a telas</li>
+                        <li><strong>70% das pessoas</strong> verificam o smartphone logo ao acordar</li>
+                        <li><strong>60% dos jovens</strong> relatam sintomas de ansiedade quando ficam sem celular</li>
+                        <li>A luz azul das telas pode reduzir a produção de melatonina em <strong>até 30%</strong></li>
+                    </ul>
+                </div>
+                
+                <h3>Por Que Este Assunto é Importante?</h3>
+                <p>O uso consciente de tecnologia não significa abandonar os dispositivos, mas sim encontrar um equilíbrio que permita aproveitar os benefícios da conectividade sem comprometer a saúde e o bem-estar.</p>
+            </div>
+        </div>
+        
+        <div id="risks" class="tab-content">
+            <div class="card">
+                <div class="progress-indicator">
+                    <button class="mark-read-btn" data-section="risks">Marcar como Lido</button>
+                </div>
+                <h2>Riscos da Exposição Prolongada a Telas</h2>
+                <p>O uso excessivo de dispositivos digitais pode impactar diversas áreas da nossa saúde. Conheça os principais riscos:</p>
+                
+                <div class="risks-grid">
+                    <div class="risk-card">
+                        <h4><i class="fas fa-eye"></i> Saúde Visual</h4>
+                        <ul>
+                            <li>Síndrome da Visão Computacional</li>
+                            <li>Olhos secos e irritados</li>
+                            <li>Fadiga ocular</li>
+                            <li>Visão turva</li>
+                            <li>Dificuldade de foco</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <h4><i class="fas fa-brain"></i> Saúde Mental</h4>
+                        <ul>
+                            <li>Ansiedade e depressão</li>
+                            <li>Dependência digital</li>
+                            <li>Redução da atenção</li>
+                            <li>Memória prejudicada</li>
+                            <li>Comparação social excessiva</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <h4><i class="fas fa-bed"></i> Qualidade do Sono</h4>
+                        <ul>
+                            <li>Insônia e sono fragmentado</li>
+                            <li>Redução da melatonina</li>
+                            <li>Alteração do ritmo circadiano</li>
+                            <li>Sonolência diurna</li>
+                            <li>Diminuição do sono REM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <h4><i class="fas fa-users"></i> Relacionamentos</h4>
+                        <ul>
+                            <li>Comunicação prejudicada</li>
+                            <li>Isolamento social</li>
+                            <li>Conflitos familiares</li>
+                            <li>Redução da empatia</li>
+                            <li>Falta de conexão real</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <h4><i class="fas fa-bone"></i> Saúde Física</h4>
+                        <ul>
+                            <li>Dores cervicais e lombares</li>
+                            <li>Problemas posturais</li>
+                            <li>Síndrome do Túnel do Carpo</li>
+                            <li>Sedentarismo</li>
+                            <li>Obesidade</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <h4><i class="fas fa-graduation-cap"></i> Produtividade</h4>
+                        <ul>
+                            <li>Multitasking ineficiente</li>
+                            <li>Distrações constantes</li>
+                            <li>Redução do foco profundo</li>
+                            <li>Procrastinação</li>
+                            <li>Esgotamento mental</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="danger">
+                    <h4>Fatores que Agravam os Riscos</h4>
+                    <ul>
+                        <li><strong>Uso noturno:</strong> A luz azul suprime a melatonina, hormônio do sono</li>
+                        <li><strong>Má postura:</strong> Posições inadequadas causam dores crônicas</li>
+                        <li><strong>Conteúdo estimulante:</strong> Notícias negativas e redes sociais aumentam a ansiedade</li>
+                        <li><strong>Falta de pausas:</strong> Trabalho contínuo sem intervalos acelera a fadiga</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="solutions" class="tab-content">
+            <div class="card">
+                <div class="progress-indicator">
+                    <button class="mark-read-btn" data-section="solutions">Marcar como Lido</button>
+                </div>
+                <h2>Como Usar a Tecnologia de Forma Saudável</h2>
+                <p>Implementar hábitos digitais saudáveis pode transformar sua relação com a tecnologia. Confira estratégias práticas:</p>
+                
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4><i class="fas fa-sun"></i> Rotina Matinal</h4>
+                        <ul>
+                            <li>Evite telas na primeira hora do dia</li>
+                            <li>Pratique mindfulness ou meditação</li>
+                            <li>Estabeleça intenções para o dia</li>
+                            <li>Exercite-se antes de verificar notificações</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h4><i class="fas fa-clock"></i> Gestão do Tempo</h4>
+                        <ul>
+                            <li>Use a técnica Pomodoro (25min trabalho/5min pausa)</li>
+                            <li>Estabeleça horários específicos para redes sociais</li>
+                            <li>Desative notificações não essenciais</li>
+                            <li>Programe "detoxes digitais" regulares</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h4><i class="fas fa-bed"></i> Higiene do Sono</h4>
+                        <ul>
+                            <li>Evite telas 1-2 horas antes de dormir</li>
+                            <li>Use modo noturno sempre</li>
+                            <li>Mantenha dispositivos fora do quarto</li>
+                            <li>Estabeleça um ritual de relaxamento noturno</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h4><i class="fas fa-eye"></i> Cuidados Visuais</h4>
+                        <ul>
+                            <li>Siga a regra 20-20-20 (a cada 20min, olhe 20s para 20 pés)</li>
+                            <li>Ajuste brilho e contraste adequadamente</li>
+                            <li>Use filtro de luz azul</li>
+                            <li>Posicione a tela na altura dos olhos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h4><i class="fas fa-heart"></i> Saúde Física</h4>
+                        <ul>
+                            <li>Faça alongamentos a cada hora</li>
+                            <li>Mantenha boa postura</li>
+                            <li>Use ergonomia adequada</li>
+                            <li>Incorpore movimento no dia</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h4><i class="fas fa-brain"></i> Saúde Mental</h4>
+                        <ul>
+                            <li>Pratique atenção plena (mindfulness)</li>
+                            <li>Estabeleça limites claros de uso</li>
+                            <li>Curta momentos offline intencionais</li>
+                            <li>Desenvolva hobbies analógicos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="daily-plan">
+                    <h3>Exemplo de Dia Digital Saudável</h3>
+                    <div class="time-slot">
+                        <div class="time">7:00 - 8:00</div>
+                        <div class="activity"><i class="fas fa-coffee"></i> Acordar sem telas - alongamento, hidratação e café da manhã</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">8:00 - 12:00</div>
+                        <div class="activity"><i class="fas fa-laptop"></i> Trabalho com pausas a cada 25min (técnica Pomodoro)</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">12:00 - 13:00</div>
+                        <div class="activity"><i class="fas fa-utensils"></i> Almoço sem telas - conversa ou leitura de livro físico</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">13:00 - 17:00</div>
+                        <div class="activity"><i class="fas fa-laptop"></i> Trabalho com pausa para alongamento às 15:00</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">17:00 - 19:00</div>
+                        <div class="activity"><i class="fas fa-running"></i> Exercício físico ou atividade ao ar livre</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">19:00 - 21:00</div>
+                        <div class="activity"><i class="fas fa-user-friends"></i> Tempo com família/amigos - jantar sem telas</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time">21:00 - 22:00</div>
+                        <div class="activity"><i class="fas fa-book"></i> Rotina noturna sem telas - leitura, meditação, planejamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="identification" class="tab-content">
+            <div class="card">
+                <div class="progress-indicator">
+                    <button class="mark-read-btn" data-section="identification">Marcar como Lido</button>
+                </div>
+                <h2>Identificando o Problema e Tomando Medidas</h2>
+                <p>Reconhecer os sinais de uso problemático de tecnologia é o primeiro passo para mudar. Veja como identificar e agir:</p>
+                
+                <h3>Sinais de Alerta</h3>
+                <div class="symptom-list">
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verificar o celular compulsivamente</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Ansiedade quando não tem acesso à internet</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Dificuldade para se concentrar em tarefas</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Problemas para dormir ou acordar cansado</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Dores nas costas, pescoço ou ombros</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Visão cansada ou embaçada</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Negligenciar responsabilidades</span>
+                    </div>
+                    <div class="symptom-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Isolamento de familiares e amigos</span>
+                    </div>
+                </div>
+                
+                <h3>Primeiras Medidas a Tomar</h3>
+                
+                <div class="success">
+                    <h4>1. Autoavaliação</h4>
+                    <p>Monitore seu uso por uma semana usando aplicativos de controle de tempo de tela. Identifique padrões e gatilhos.</p>
+                </div>
+                
+                <div class="success">
+                    <h4>2. Estabeleça Metas Realistas</h4>
+                    <p>Comece com pequenas mudanças: reduzir 30 minutos de uso diário, estabelecer zonas livres de tecnologia em casa.</p>
+                </div>
+                
+                <div class="success">
+                    <h4>3. Crie Alternativas</h4>
+                    <p>Substitua o tempo em telas por atividades prazerosas: leitura, exercícios, hobbies, encontros sociais.</p>
+                </div>
+                
+                <div class="success">
+                    <h4>4. Busque Apoio</h4>
+                    <p>Converse com familiares sobre suas metas, participe de grupos de apoio ou busque ajuda profissional se necessário.</p>
+                </div>
+                
+                <div class="warning">
+                    <h4>Quando Buscar Ajuda Profissional</h4>
+                    <ul>
+                        <li>Quando o uso interfere significativamente no trabalho ou estudos</li>
+                        <li>Se houver sintomas de depressão ou ansiedade severa</li>
+                        <li>Quando tentativas de redução falham repetidamente</li>
+                        <li>Se o uso estiver causando conflitos familiares graves</li>
+                        <li>Quando há sintomas físicos persistentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="quiz" class="tab-content">
+            <div class="card">
+                <h2>Teste seus Conhecimentos sobre Saúde Digital</h2>
+                <p>Responda às perguntas para verificar sua compreensão sobre o uso saudável de tecnologia.</p>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <h3>1. Qual é a recomendação sobre uso de telas antes de dormir?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-correct="true">Evitar telas 1-2 horas antes de dormir</div>
+                            <div class="quiz-option">Usar apenas com filtro de luz azul</div>
+                            <div class="quiz-option">Assistir conteúdo relaxante ajuda a dormir</div>
+                            <div class="quiz-option">Não há problema se o brilho estiver baixo</div>
+                        </div>
+                        <div class="quiz-result"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>2. O que é a regra 20-20-20 para saúde visual?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option">20min de tela, 20min de descanso, 20min de exercício</div>
+                            <div class="quiz-option" data-correct="true">A cada 20min, olhar por 20s para algo a 20 pés</div>
+                            <div class="quiz-option">Usar telas apenas 20min por hora</div>
+                            <div class="quiz-option">Fazer 20 piscadas a cada 20min</div>
+                        </div>
+                        <div class="quiz-result"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>3. Qual destes NÃO é um sinal de uso problemático de tecnologia?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option">Ansiedade quando não tem acesso à internet</div>
+                            <div class="quiz-option">Dores persistentes no pescoço e ombros</div>
+                            <div class="quiz-option">Verificar o celular compulsivamente</div>
+                            <div class="quiz-option" data-correct="true">Usar tecnologia para trabalho 8h por dia</div>
+                        </div>
+                        <div class="quiz-result"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>4. Qual é uma estratégia eficaz para reduzir o tempo em telas?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option">Desativar todas as notificações permanentemente</div>
+                            <div class="quiz-option">Eliminar completamente o uso de redes sociais</div>
+                            <div class="quiz-option" data-correct="true">Estabelecer horários específicos para uso</div>
+                            <div class="quiz-option">Usar apenas um dispositivo por vez</div>
+                        </div>
+                        <div class="quiz-result"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>5. Por que a luz azul das telas afeta o sono?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option">Aquece o cérebro e impede o relaxamento</div>
+                            <div class="quiz-option" data-correct="true">Suprime a produção de melatonina</div>
+                            <div class="quiz-option">Estimula demais o sistema nervoso</div>
+                            <div class="quiz-option">Causa dores de cabeça que impedem o sono</div>
+                        </div>
+                        <div class="quiz-result"></div>
+                    </div>
+                    
+                    <button id="check-answers" class="btn">Verificar Respostas</button>
+                </div>
+                
+                <div class="final-results" id="final-results">
+                    <h3 id="result-title">Resultado do Quiz</h3>
+                    <p id="result-message"></p>
+                    <button id="try-again" class="btn" style="margin-top: 1rem;">Tentar Novamente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Saúde Digital - Equilibrando Tecnologia e Bem-Estar</p>
+        <p>Desenvolvido por: Eduardo Matos - RU: 3838064</p>
+    </footer>
+
+    <script>
+        // Estado do progresso
+        const progressState = {
+            intro: false,
+            risks: false,
+            solutions: false,
+            identification: false,
+            quiz: false
+        };
+        
+        // Navegação entre abas
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens do menu
+                document.querySelectorAll('.menu-item').forEach(menuItem => menuItem.classList.remove('active'));
+                
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+                
+                // Remove a classe active de todas as abas
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Mostra o conteúdo correspondente
+                const tabId = item.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Atualiza a barra de progresso
+                updateProgressBar();
+            });
+        });
+        
+        // Sistema de marcação de conteúdo lido
+        document.querySelectorAll('.mark-read-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const section = button.getAttribute('data-section');
+                progressState[section] = true;
+                
+                // Atualiza o botão
+                button.textContent = 'Conteúdo Lido';
+                button.classList.add('read');
+                button.disabled = true;
+                
+                // Atualiza a barra de progresso
+                updateProgressBar();
+                
+                // Atualiza o menu
+                updateMenuProgress();
+            });
+        });
+        
+        // Atualiza a barra de progresso global
+        function updateProgressBar() {
+            const totalSections = Object.keys(progressState).length;
+            const completedSections = Object.values(progressState).filter(val => val).length;
+            const progressPercentage = (completedSections / totalSections) * 100;
+            
+            document.getElementById('global-progress').style.width = `${progressPercentage}%`;
+        }
+        
+        // Atualiza os ícones do menu com base no progresso
+        function updateMenuProgress() {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const tabId = item.getAttribute('data-tab');
+                if (progressState[tabId]) {
+                    const icon = item.querySelector('i');
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.color = 'var(--success)';
+                }
+            });
+        }
+        
+        // Quiz interativo
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove a seleção de outras opções na mesma pergunta
+                const parent = option.parentElement;
+                parent.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Seleciona a opção clicada
+                option.classList.add('selected');
+            });
+        });
+        
+        document.getElementById('check-answers').addEventListener('click', () => {
+            let correctAnswers = 0;
+            const totalQuestions = document.querySelectorAll('.quiz-question').length;
+            
+            document.querySelectorAll('.quiz-question').forEach(question => {
+                const selectedOption = question.querySelector('.quiz-option.selected');
+                const resultDiv = question.querySelector('.quiz-result');
+                
+                if (selectedOption) {
+                    if (selectedOption.hasAttribute('data-correct')) {
+                        resultDiv.textContent = 'Correto!';
+                        resultDiv.className = 'quiz-result correct';
+                        correctAnswers++;
+                    } else {
+                        resultDiv.textContent = 'Incorreto. Tente novamente.';
+                        resultDiv.className = 'quiz-result incorrect';
+                    }
+                    resultDiv.style.display = 'block';
+                } else {
+                    resultDiv.textContent = 'Por favor, selecione uma resposta.';
+                    resultDiv.className = 'quiz-result incorrect';
+                    resultDiv.style.display = 'block';
+                }
+            });
+            
+            // Mostra resultado final
+            showFinalResults(correctAnswers, totalQuestions);
+        });
+        
+        // Botão tentar novamente
+        document.getElementById('try-again').addEventListener('click', () => {
+            // Reseta as seleções
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Esconde os resultados
+            document.querySelectorAll('.quiz-result').forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            // Esconde o resultado final
+            document.getElementById('final-results').style.display = 'none';
+        });
+        
+        // Mostra resultado final personalizado
+        function showFinalResults(correct, total) {
+            const percentage = (correct / total) * 100;
+            const resultsDiv = document.getElementById('final-results');
+            const resultTitle = document.getElementById('result-title');
+            const resultMessage = document.getElementById('result-message');
+            
+            resultsDiv.style.display = 'block';
+            
+            if (percentage >= 80) {
+                resultsDiv.className = 'final-results good';
+                resultTitle.textContent = 'Parabéns! Excelente Resultado!';
+                resultMessage.innerHTML = `Você acertou ${correct} de ${total} perguntas.<br>Seu conhecimento sobre saúde digital é excelente! Continue praticando hábitos saudáveis.`;
+                
+                // Marca o quiz como concluído
+                progressState.quiz = true;
+                updateProgressBar();
+                updateMenuProgress();
+                
+            } else if (percentage >= 60) {
+                resultsDiv.className = 'final-results average';
+                resultTitle.textContent = 'Bom Trabalho!';
+                resultMessage.innerHTML = `Você acertou ${correct} de ${total} perguntas.<br>Você tem um bom conhecimento, mas pode melhorar revisando algumas práticas saudáveis.`;
+            } else {
+                resultsDiv.className = 'final-results poor';
+                resultTitle.textContent = 'Continue Aprendendo!';
+                resultMessage.innerHTML = `Você acertou ${correct} de ${total} perguntas.<br>Não desanime! Revise o conteúdo e tente novamente. Sua saúde digital é importante.`;
+            }
+        }
+        
+        // Inicializa a barra de progresso
+        updateProgressBar();
+    </script>
+</body>
+</html>
